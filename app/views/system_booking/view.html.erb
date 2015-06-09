@@ -1,0 +1,59 @@
+<div class="margins">
+  <div class="grid_5">
+    <%= form_tag(controller: 'system_booking', action: 'view' ) do %>
+        <%= label_tag(:search, 'Search for a System booking') %>
+        <%= text_field_tag :search, params[:search] %>
+    <% end %>
+  </div>
+  <div class="grid_3 prefix_1">
+    <a href="due_today">
+      <%= button_tag 'Installations Due Today', {:class => 'small-button button-blue'} %>
+    </a>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="grid_12 margins">
+  <table class="items">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>Owner</td>
+      <td>Installation Date</td>
+      <td>Collection Date</td>
+      <td>Deposit Paid</td>
+      <td>System Booked</td>
+      <td>Total Cost</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <% if @system_bookings %>
+        <tbody>
+        <% @system_bookings.each do |sys|%>
+            <tr>
+              <td><%= sys.id %></td>
+              <td><%= sys.member.first_name + ' ' + sys.member.surname %></td>
+              <td><%= sys.install_date %></td>
+              <td><%= sys.collection_date %></td>
+              <% if sys.deposit_paid %>
+                  <td>&#10004;</td>
+              <% else %>
+                  <td>&#10006;</td>
+              <% end %>
+              <td><%= sys.system.description %></td>
+              <td><%= sys.total_cost %></td>
+              <td><%= link_to 'Receipt', {:action => 'view_receipt', :id => sys.id} %></td>
+              <td><%= link_to 'Edit', :action => 'edit', :id => sys.id %></td>
+              <td><%= link_to 'Delete', {:action => 'delete', :id => sys.id }, data:{confirm:'Are you sure?'} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    <% end %>
+  </table>
+</div>
+<div class="grid_1 prefix_10">
+  <a href="new">
+    <%= button_tag 'New', :class => 'button-blue medium-button' %>
+  </a>
+</div>

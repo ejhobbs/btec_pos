@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  description: MyText
+  audio_setup: 9.99
+  hd: false
+  3d: false
+  base_price: 9.99
+
+two:
+  description: MyText
+  audio_setup: 9.99
+  hd: false
+  3d: false
+  base_price: 9.99

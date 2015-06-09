@@ -1,0 +1,43 @@
+<div class="margins">
+  <div class="grid_2">
+    <h3>Rental ID: <%= @product_rental.id %></h3>
+  </div>
+  <div class="grid_4">
+    <h3>Start Date: <%= @product_rental.start_date %></h3>
+  </div>
+  <div class="grid_4">
+    <h3>Due Date: <%= @product_rental.due_date %></h3>
+  </div>
+</div>
+<div class="clear"></div>
+<div class="grid_10 prefix_1">
+  <table class="items">
+    <thead>
+    <tr>
+      <td style="width: 40%">Product Name</td>
+      <td>Price</td>
+      <td>Subtotal</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% if @rental_items %>
+        <% @rental_items.each do |item| %>
+            <tr>
+              <td><%= item.product.name %></td>
+              <td><%= item.product.product_type.price %></td>
+              <td><%= item.product.product_type.price * item.product_rental.duration %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+    <tfoot>
+    <%= form_for :product_rental_item, :url => {:controller => 'product_rental', :action => 'add_items', :id => @product_rental.id} do |f| %>
+        <tr>
+          <td><%= f.collection_select(:product_id, Product.all, :id, :name)%></td>
+          <td><%= f.submit 'Add More' %></td>
+          <td><%= f.submit 'Done'%></td>
+        </tr>
+    <% end %>
+    </tfoot>
+  </table>
+</div>

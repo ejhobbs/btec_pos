@@ -1,0 +1,35 @@
+<% if @product_rental.errors.any? %>
+    <div class="alert alert-error">
+      <% @product_rental.errors.full_messages.each do |err| %>
+          <%= err %><br>
+      <% end %>
+    </div>
+<% end %>
+<div class="margins">
+  <%= form_for :product_rental, :url => {:action => 'process_new'} do |f| %>
+      <div class="prefix_2 grid_2">
+        <%= f.label :member_id %>
+      </div>
+      <div class="grid_2">
+        <%= f.collection_select(:member_id, Member.all, :id, :id) %>
+      </div>
+      <div class="clear margins-bottom"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :start_date %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :start_date %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :due_date %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :due_date %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_4 grid_2">
+        <%= f.submit 'Add Items'%>
+      </div>
+  <% end %>
+</div>

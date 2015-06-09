@@ -1,0 +1,66 @@
+<div class="margins">
+  <div class="grid_4">
+    <%= form_tag(controller: 'member', action: 'view' ) do %>
+        <%= label_tag(:search, 'Search for a Member') %>
+        <%= text_field_tag :search, params[:search] %>
+    <% end %>
+  </div>
+</div>
+<div class="grid_5">
+  <%= form_tag({:controller => 'member', :action => 'upload'}, :multipart => true) do %>
+      <%= label_tag(:upload, 'Upload CSV') %>
+      <%= file_field_tag :upload, :class => '' %>
+      <%= button_tag 'Upload', :class => 'button-blue small-button'%>
+  <% end %>
+</div>
+<div class="grid_3">
+  <a href="download">
+    <%= button_tag 'Download Reference CSV', {:class => 'small-button button-blue'} %>
+  </a>
+</div>
+<div class="clear"></div>
+<div class="grid_12 margins">
+  <table class="items">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>Title</td>
+      <td>First Name</td>
+      <td>Surname</td>
+      <td>House Number</td>
+      <td>Street Name</td>
+      <td>Postcode</td>
+      <td>Date of Birth</td>
+      <td>Contact Number</td>
+      <td>Membership Level</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <% if @members %>
+        <tbody>
+        <% @members.each do |member|%>
+            <tr>
+              <td><%= member.id %></td>
+              <td><%= member.title %></td>
+              <td><%= member.first_name %></td>
+              <td><%= member.surname %></td>
+              <td><%= member.house_no %></td>
+              <td><%= member.street_name %></td>
+              <td><%= member.postcode %></td>
+              <td><%= member.date_of_birth %></td>
+              <td><%= member.contact_no %></td>
+              <td><%= member.member_type.easy_name %></td>
+              <td><%= link_to 'Edit', {:action => 'edit', :id => member.id }  %></td>
+              <td><%= link_to 'Delete', {:action => 'delete', :id => member.id}, data:{ confirm: 'Are you sure?' } %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    <% end %>
+  </table>
+</div>
+<div class="grid_1 prefix_10">
+  <a href="new">
+    <%= button_tag 'New', :class => 'button-blue medium-button' %>
+  </a>
+</div>

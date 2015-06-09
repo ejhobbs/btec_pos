@@ -1,0 +1,74 @@
+<html>
+<head>
+  <%= wicked_pdf_stylesheet_link_tag 'application' %>
+</head>
+<body>
+<div class="container_12">
+  <div class="grid_2">
+    <%= wicked_pdf_image_tag 'kool-media-logo.png', :style => 'height: 90px'%>
+  </div>
+  <div class="grid_2 prefix_8">
+    <p>
+      Address<br>
+      Parts<br>
+      About<br>
+      Kool Media Rentals
+    </p>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_5">
+    <h1>Receipt ID: <%= @system_booking.id %></h1>
+  </div>
+  <div class="grid_5">
+    <h1>Customer ID: <%= @system_booking.member.id %></h1>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_10 prefix_1">
+    <table class="items">
+      <thead>
+      <tr>
+        <td>System ID</td>
+        <td>Installation Date</td>
+        <td>Collection Date</td>
+        <td>Deposit Paid</td>
+        <td>System Description</td>
+        <td>System Cost</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><%= @system_booking.system.id %></td>
+        <td><%=@system_booking.install_date%></td>
+        <td><%=@system_booking.collection_date%></td>
+        <% if @system_booking.deposit_paid %>
+            <td>&#10004;</td>
+        <% else %>
+            <td>&#10006;</td>
+        <% end %>
+        <td><%= @system_booking.system.description %></td>
+        <td><%= @system_booking.total_cost%></td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><strong>Deposit Owed</strong></td>
+        <td><%= @system_booking.deposit_paid ? 0 : 50 %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><strong>Final Cost</strong></td>
+        <td><%= @system_booking.deposit_paid ? @system_booking.total_cost : @system_booking.total_cost + 50 %></td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+</body>
+</html>

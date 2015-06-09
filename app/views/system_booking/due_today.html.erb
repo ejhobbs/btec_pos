@@ -1,0 +1,53 @@
+<html>
+<head>
+  <%= wicked_pdf_stylesheet_link_tag 'application' %>
+</head>
+<body>
+<div class="container_12">
+  <div class='grid_4 prefix_4 suffix_4'>
+    <a href="/">
+      <%= wicked_pdf_image_tag 'kool-media-logo.png', :class => 'center margins', :style => 'height: 100px' %>
+    </a>
+  </div>
+  <div class='clear'></div>
+  <div class="grid_6 prefix_3 margins">
+    <h1>Installations Due: <%= Date.today%></h1>
+  </div>
+  <div class='clear'></div>
+  <div class="grid_12 margins">
+    <table class="items">
+      <thead>
+      <tr>
+        <td>ID</td>
+        <td>Owner</td>
+        <td>House Number</td>
+        <td>Street Name</td>
+        <td>Postcode</td>
+        <td>System Description</td>
+        <td>Deposit Paid</td>
+      </tr>
+      </thead>
+      <% if @system_bookings %>
+          <tbody>
+          <% @system_bookings.each do |sys|%>
+              <tr>
+                <td><%= sys.id %></td>
+                <td><%= sys.member.first_name + ' ' + sys.member.surname %></td>
+                <td><%= sys.member.house_no %></td>
+                <td><%= sys.member.street_name %></td>
+                <td><%= sys.member.postcode %></td>
+                <td><%= sys.system.description %></td>
+                <% if sys.deposit_paid %>
+                    <td>&#10004;</td>
+                <% else %>
+                    <td>&#10006;</td>
+                <% end %>
+              </tr>
+          <% end %>
+          </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
+</body>
+</html>

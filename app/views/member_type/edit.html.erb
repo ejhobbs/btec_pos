@@ -1,0 +1,35 @@
+<% if @member_type.errors.any? %>
+    <div class="alert alert-error">
+      <% @member_type.errors.full_messages.each do |err| %>
+          <%= err %><br>
+      <% end %>
+    </div>
+<% end %>
+<div class="margins">
+  <%= form_for :member_type, :url => {:action => 'process_edit', :id => @member_type.id} do |f| %>
+      <div class="prefix_2 grid_2">
+        <%= f.label :easy_name, 'Type Name' %>
+      </div>
+      <div class="grid_2">
+        <%= f.text_field :easy_name %>
+      </div>
+      <div class="clear margins-bottom"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :price %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :price %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :requires_previous, 'Requires Previous?' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.check_box :requires_previous %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_4 grid_2">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>

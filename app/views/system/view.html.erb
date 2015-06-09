@@ -1,0 +1,68 @@
+<div class="margins">
+    <div class="grid_4">
+      <%= form_tag(controller: 'system', action: 'view' ) do %>
+          <%= label_tag(:search, 'Search for a System') %>
+          <%= text_field_tag :search, params[:search] %>
+      <% end %>
+</div>
+</div>
+<div class="grid_5">
+  <%= form_tag({:controller => 'system', :action => 'upload'}, :multipart => true) do %>
+      <%= label_tag(:upload, 'Upload CSV') %>
+      <%= file_field_tag :upload, :class => '' %>
+      <%= button_tag 'Upload', :class => 'button-blue'%>
+  <% end %>
+</div>
+<div class="grid_3">
+  <a href="download">
+    <%= button_tag 'Download Reference CSV', {:class => 'small-button button-blue'} %>
+  </a>
+</div>
+<div class="clear"></div>
+<div class="grid_12 margins">
+    <table class="items">
+    <thead>
+        <tr>
+          <td>ID</td>
+          <td>Description</td>
+          <td>Audio Setup</td>
+          <td>HD</td>
+          <td>3D</td>
+          <td>Base Price</td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    </thead>
+    <% if @systems %>
+    <tbody>
+        <% @systems.each do |sys|%>
+        <tr>
+          <td><%= sys.id %></td>
+          <td><%= sys.description %></td>
+          <td><%= sys.audio_setup %></td>
+          <% if sys.hd %>
+            <td>&#10004;</td>
+          <% else %>
+            <td>&#10006;</td>
+          <% end %>
+          <% if sys.three_d %>
+              <td>&#10004;</td>
+          <% else %>
+              <td>&#10006;</td>
+          <% end %>
+          <td><%= sys.base_price %></td>
+          <td><%= link_to 'Book', {:controller => :system_booking, :action => 'new', :system_id => sys.id} %></td>
+          <td><%= link_to 'Edit', :action => 'edit', :id => sys.id %></td>
+          <td><%= link_to 'Delete', {:action => 'delete', :id => sys.id }, data:{confirm:'Are you sure?'} %></td>
+        </tr>
+        <% end %>
+    </tbody>
+    <% end %>
+    </table>
+</div>
+<div class="grid_1 prefix_10">
+  <a href="new">
+    <%= button_tag 'New', :class => 'button-blue medium-button' %>
+  </a>
+</div>

@@ -1,0 +1,47 @@
+<html>
+<head>
+  <%= wicked_pdf_stylesheet_link_tag 'application' %>
+</head>
+<body>
+<div class="container_12">
+  <div class='grid_4 prefix_4 suffix_4'>
+    <a href="/">
+      <%= wicked_pdf_image_tag 'kool-media-logo.png', :class => 'center margins', :style => 'height: 100px' %>
+    </a>
+  </div>
+  <div class='clear'></div>
+  <div class="grid_6 prefix_3 margins">
+    <h1>Overdue Rentals: <%= Date.today%></h1>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_12 margins">
+    <table class="items">
+      <thead>
+      <tr>
+        <td>ID</td>
+        <td>Owner</td>
+        <td>Start Date</td>
+        <td>Due Date</td>
+        <td>Days Late</td>
+        <td>Fees Owed</td>
+      </tr>
+      </thead>
+      <% if @product_rentals %>
+          <tbody>
+          <% @product_rentals.each do |sys|%>
+              <tr>
+                <td><%= sys.id %></td>
+                <td><%= sys.member.first_name + ' ' + sys.member.surname %></td>
+                <td><%= sys.start_date %></td>
+                <td><%= sys.due_date %></td>
+                <td><%= (Date.today - sys.due_date) %></td>
+                <td><%= sys.late_fees %></td>
+              </tr>
+          <% end %>
+          </tbody>
+      <% end %>
+    </table>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<% if @product.errors.any? %>
+    <div class="alert alert-error">
+      <% @product.errors.full_messages.each do |err| %>
+          <%= err %><br>
+      <% end %>
+    </div>
+<% end %>
+<div class="margins">
+  <%= form_for :product, :url => {:action => 'process_edit', :id => @product.id} do |f| %>
+      <div class="prefix_2 grid_2">
+        <%= f.label :name %>
+      </div>
+      <div class="grid_2">
+        <%= f.text_field :name %>
+      </div>
+      <div class="clear margins-bottom"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :product_type_id %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.collection_select(:product_type_id,ProductType.all, :id, :easy_name) %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :imdb_id %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :imdb_id %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :age_rating %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.select :age_rating, %w{U PG 12 12A 15 18 R18} %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :star_rating, 'Star Rating'%>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :star_rating %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :synopsis %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_area :synopsis %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_4 grid_2">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>

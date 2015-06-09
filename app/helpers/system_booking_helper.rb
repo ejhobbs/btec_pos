@@ -1,0 +1,2 @@
+module SystemBookingHelper
+end

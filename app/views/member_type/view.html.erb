@@ -1,0 +1,58 @@
+<div class="margins">
+  <div class="grid_4">
+    <%= form_tag(controller: 'member_type', action: 'view' ) do %>
+        <%= label_tag(:search, 'Search for a Member Type') %>
+        <%= text_field_tag :search, params[:search] %>
+    <% end %>
+  </div>
+</div>
+<div class="grid_5">
+  <%= form_tag({:controller => 'member_type', :action => 'upload'}, :multipart => true) do %>
+      <%= label_tag(:upload, 'Upload CSV') %>
+      <%= file_field_tag :upload, :class => '' %>
+      <%= button_tag 'Upload', :class => 'button-blue'%>
+  <% end %>
+</div>
+<div class="grid_3">
+  <a href="download">
+    <%= button_tag 'Download Reference CSV', {:class => 'small-button button-blue'} %>
+  </a>
+</div>
+<div class="clear"></div>
+<div class="grid_12 margins">
+  <table class="items">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>Level Name</td>
+      <td>Price</td>
+      <td>Requires Previous</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <% if @member_types %>
+        <tbody>
+        <% @member_types.each do |member_type|%>
+            <tr>
+              <td><%= member_type.id %></td>
+              <td><%= member_type.easy_name %></td>
+              <td><%= member_type.price %></td>
+              <% if member_type.requires_previous %>
+                  <td>&#10004;</td>
+              <% else %>
+                  <td>&#10006;</td>
+              <% end %>
+              <td><%= link_to 'Edit', {:action => 'edit', :id => member_type.id} %></td>
+              <td><%= link_to 'Delete', {:action => 'delete', :id => member_type.id}, data:{ confirm: 'Are you sure?'}  %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    <% end %>
+  </table>
+</div>
+<div class="grid_1 prefix_10">
+  <a href="new">
+    <%= button_tag 'New', :class => 'button-blue medium-button' %>
+  </a>
+</div>

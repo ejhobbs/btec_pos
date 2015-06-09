@@ -1,0 +1,70 @@
+<% if @member.errors.any? %>
+    <div class="alert alert-error">
+      <% @member.errors.full_messages.each do |err| %>
+          <%= err %><br>
+      <% end %>
+    </div>
+<% end %>
+<div class="margins">
+  <%= form_for :member, :url => {:action => 'process_edit', :id => @member.id} do |f| %>
+      <div class="prefix_2 grid_2">
+        <%= f.label :title %>
+      </div>
+      <div class="grid_2">
+        <%= f.select :title, %w(Mr Mrs Dr Miss Mx Ms) %>
+      </div>
+      <div class="clear margins-bottom"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :first_name %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :first_name %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :surname %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :surname %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :house_no, 'House Number' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :house_no %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :street_name, 'Street Name' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :street_name %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :postcode %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :postcode %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :date_of_birth %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :date_of_birth %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :contact_no, 'Contact Number' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :contact_no %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_4 grid_2">
+        <%= f.submit 'Save Changes'%>
+      </div>
+  <% end %>
+</div>

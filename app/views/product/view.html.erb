@@ -1,0 +1,60 @@
+<div class="margins">
+  <div class="grid_4">
+    <%= form_tag(controller: 'product', action: 'view' ) do %>
+        <%= label_tag(:search, 'Search for a Product') %>
+        <%= text_field_tag :search, params[:search] %>
+    <% end %>
+  </div>
+</div>
+<div class="grid_5">
+  <%= form_tag({:controller => 'product', :action => 'upload'}, :multipart => true) do %>
+      <%= label_tag(:upload, 'Upload CSV') %>
+      <%= file_field_tag :upload, :class => '' %>
+      <%= button_tag 'Upload', :class => 'button-blue'%>
+  <% end %>
+</div>
+<div class="grid_3">
+  <a href="download">
+    <%= button_tag 'Download Reference CSV', {:class => 'small-button button-blue'} %>
+  </a>
+</div>
+<div class="clear"></div>
+<div class="grid_12 margins">
+  <table class="items">
+    <thead>
+    <tr>
+      <td>ID</td>
+      <td>Name</td>
+      <td>Product Type</td>
+      <td>IMDB Link</td>
+      <td>Age Rating</td>
+      <td>Star Rating</td>
+      <td>Synopsis</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </thead>
+    <% if @products %>
+        <tbody>
+        <% @products.each do |product|%>
+            <tr>
+              <td><%= product.id %></td>
+              <td><%= product.name %></td>
+              <td><%= product.product_type.easy_name %></td>
+              <td><a target='_blank' href='http://imdb.com/title/<%= product.imdb_id %>'>IMDB</a></td>
+              <td><%= image_tag product.age_rating+'.gif', :class => 'img-small' %></td>
+              <td><%= product.star_rating %></td>
+              <td style="width: 40%"><%= product.synopsis %></td>
+              <td><%= link_to 'Edit', :action => 'edit', :id => product.id %></td>
+              <td><%= link_to 'Delete', {:action => 'delete', :id => product.id}, data:{confirm:'Are you sure?'} %></td>
+            </tr>
+        <% end %>
+        </tbody>
+    <% end %>
+  </table>
+</div>
+<div class="grid_1 prefix_10">
+  <a href="new">
+    <%= button_tag 'New', :class => 'button-blue medium-button' %>
+  </a>
+</div>

@@ -1,0 +1,66 @@
+<html>
+<head>
+  <%= wicked_pdf_stylesheet_link_tag 'application' %>
+</head>
+<body>
+<div class="container_12">
+  <div class="grid_2">
+    <%= wicked_pdf_image_tag 'kool-media-logo.png', :style => 'height: 90px'%>
+  </div>
+  <div class="grid_2 prefix_8">
+    <p>
+      Address<br>
+      Parts<br>
+      About<br>
+      Kool Media Rentals
+    </p>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_5">
+    <h1>Receipt ID: <%= @product_rental.id %></h1>
+  </div>
+  <div class="grid_5">
+    <h1>Customer ID: <%= @product_rental.member.id %></h1>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_4">
+    <h3>Start Date: <%= @product_rental.start_date %></h3>
+  </div>
+  <div class="grid_4">
+    <h3>Due Date: <%= @product_rental.due_date %></h3>
+  </div>
+  <div class="grid_10 prefix_1">
+    <table class="items">
+      <thead>
+      <tr>
+        <td>Product ID</td>
+        <td>Product Base Cost</td>
+        <td>Product Subtotal</td>
+      </tr>
+      </thead>
+      <tbody>
+      <% @product_rental.product_rental_items.each do |item| %>
+          <tr>
+            <td><%= item.product_id %></td>
+            <td><%= item.product.product_type.price %></td>
+            <td><%= item.product.product_type.price * @product_rental.duration %></td>
+          </tr>
+      <% end %>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td></td>
+        <td><strong>Late Fees</strong></td>
+        <td><%= @product_rental.late_fees %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><strong>Total Cost</strong></td>
+        <td><%= @product_rental.late_fees + @product_rental.total_price %></td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+</body>
+</html>

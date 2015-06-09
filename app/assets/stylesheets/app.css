@@ -1,0 +1,86 @@
+.center {
+    display: block;
+    margin: 0 auto;
+}
+
+.margins {
+    margin-top: 10px;
+}
+
+.margins-bottom {
+    margin-bottom: 10px;
+}
+
+.large-button {
+    height: 70px;
+    width: 140px;
+    margin-top: 10px;
+    border-width: 2px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.medium-button {
+    height: 40px;
+    width: 80px;
+    border-width: 1px;
+    border-radius: 4px;
+    font-size: 18px;
+    margin-bottom: 50px;
+}
+
+.small-button {
+    height: 20px;
+    border-width: 1px;
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+.button-blue {
+    background-color: blue;
+    color: white;
+}
+
+.smaller-text {
+    font-size: 16px;
+}
+
+.alert {
+    border: 2px solid;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-size: 16px;
+    letter-spacing: .1em;
+}
+
+.alert-info {
+    background-color: dodgerblue;
+    color: lightskyblue;
+    border-color: lightskyblue;
+}
+
+.alert-error {
+    background-color: darkred;
+    color: orangered;
+    border-color: orangered;
+}
+
+.items {
+    width: 100%;
+    padding: 5px;
+}
+.items thead td {
+    font-weight: bold;
+    border-bottom: 1px solid black;
+}
+
+.items tbody tr:nth-child(odd) {
+    background-color: gainsboro;
+}
+
+.img-small {
+    height: 50px;
+    width: auto;
+}

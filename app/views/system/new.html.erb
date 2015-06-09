@@ -1,0 +1,49 @@
+<% if @system.errors.any? %>
+    <div class="alert alert-error">
+      <% @system.errors.full_messages.each do |err| %>
+          <%= err %><br>
+      <% end %>
+    </div>
+<% end %>
+<div class="margins">
+  <%= form_for :system, :url => {:action => 'process_new'} do |f| %>
+      <div class="prefix_2 grid_2">
+        <%= f.label :description %>
+      </div>
+      <div class="grid_2">
+        <%= f.text_area :description %>
+      </div>
+      <div class="clear margins-bottom"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :audio_setup %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :audio_setup %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :hd, 'HD?' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.check_box :hd %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :three_d, '3D?' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.check_box :three_d %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :base_price%>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :base_price %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_4 grid_2">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>

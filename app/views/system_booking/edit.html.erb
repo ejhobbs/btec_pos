@@ -1,0 +1,49 @@
+<% if @system_booking.errors.any? %>
+    <div class="alert alert-error">
+      <% @system_booking.errors.full_messages.each do |err| %>
+          <%= err %><br>
+      <% end %>
+    </div>
+<% end %>
+<div class="margins">
+  <%= form_for :system_booking, :url => {:action => 'process_edit', :id => @system_booking.id} do |f| %>
+      <div class="prefix_2 grid_2">
+        <%= f.label :member_id %>
+      </div>
+      <div class="grid_2">
+        <%= f.collection_select(:member_id, Member.all, :id, :id) %>
+      </div>
+      <div class="clear margins-bottom"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :install_date %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :install_date %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :collection_date %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.text_field :collection_date %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :deposit_paid, 'Deposit Paid?' %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.check_box :deposit_paid %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_2 grid_2">
+        <%= f.label :system_id %>
+      </div>
+      <div class="grid_2 margins-bottom">
+        <%= f.collection_select(:system_id, System.all, :id, :description) %>
+      </div>
+      <div class="clear"></div>
+      <div class="prefix_4 grid_2">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>
